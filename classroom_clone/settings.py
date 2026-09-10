@@ -1,7 +1,10 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = 'django-insecure-classroom-clone-secret-key-change-in-production'
 
@@ -21,6 +24,7 @@ INSTALLED_APPS = [
     'accounts',
     'classroom',
     'assignments',
+    'ai_assistant',
 ]
 
 MIDDLEWARE = [
@@ -87,3 +91,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# AI provider configuration is read from the server environment only.
+GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-3.6-flash')

@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('classroom/', include('classroom.urls')),
     path('assignments/', include('assignments.urls')),
+    path('ai/', include('ai_assistant.urls')),
 ]
 
 if settings.DEBUG:

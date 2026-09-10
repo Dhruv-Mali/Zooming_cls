@@ -197,6 +197,28 @@ Sem-4-project/
 
 ## 🔧 Configuration
 
+### AI Features
+
+The project includes a separate `ai_assistant` app with permission-scoped tools:
+
+- Students can ask questions about materials in classrooms they are enrolled in.
+- Teachers can generate assignment drafts, summarize PDF/DOCX/text materials, create revision quizzes, and request submission feedback suggestions.
+- AI grading is advisory only. The teacher must edit and submit the existing grade form before marks or feedback are saved.
+
+Install the AI dependencies and configure the provider on the server:
+
+```powershell
+pip install -r requirements.txt
+$env:GEMINI_API_KEY = "your-gemini-api-key"
+$env:GEMINI_MODEL = "gemini-3.6-flash"  # optional
+python manage.py migrate
+python manage.py runserver
+```
+
+The key is read only by the server and is never exposed to templates or browser JavaScript. Supported material formats are `.pdf`, `.docx`, `.txt`, and `.md`. Copy `.env.example` to `.env` and add your key; the project loads this local ignored file on startup and never commits it.
+
+AI routes are available under `/ai/`. Teachers can also reach the tools from the sidebar and the AI Review action in a submission list.
+
 ### Settings (classroom_clone/settings.py)
 
 ```python

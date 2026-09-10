@@ -14,7 +14,7 @@
     <script src="{% static 'js/forms.js' %}" defer></script>
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="{% if user.is_authenticated %}app-body{% else %}public-body{% endif %}">
 {% if user.is_authenticated %}
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
@@ -28,6 +28,15 @@
             <a href="{% url 'create_classroom' %}" class="nav-item {% if request.resolver_match.url_name == 'create_classroom' %}active{% endif %}">
                 <i class="fas fa-plus-circle"></i><span>New Class</span>
             </a>
+            <a href="{% url 'ai_assistant:assignment_generator' %}" class="nav-item {% if request.resolver_match.url_name == 'assignment_generator' %}active{% endif %}">
+                <i class="fas fa-wand-magic-sparkles"></i><span>AI Assignment</span>
+            </a>
+            <a href="{% url 'ai_assistant:material_summarizer' %}" class="nav-item {% if request.resolver_match.url_name == 'material_summarizer' %}active{% endif %}">
+                <i class="fas fa-file-lines"></i><span>AI Materials</span>
+            </a>
+            <a href="{% url 'ai_assistant:quiz_generator' %}" class="nav-item {% if request.resolver_match.url_name == 'quiz_generator' %}active{% endif %}">
+                <i class="fas fa-circle-question"></i><span>AI Quiz</span>
+            </a>
         {% else %}
             <a href="{% url 'student_dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'student_dashboard' %}active{% endif %}">
                 <i class="fas fa-th-large"></i><span>Dashboard</span>
@@ -37,6 +46,9 @@
             </a>
             <a href="{% url 'my_submissions' %}" class="nav-item {% if request.resolver_match.url_name == 'my_submissions' %}active{% endif %}">
                 <i class="fas fa-file-upload"></i><span>My Work</span>
+            </a>
+            <a href="{% url 'ai_assistant:study_assistant' %}" class="nav-item {% if request.resolver_match.url_name == 'study_assistant' %}active{% endif %}">
+                <i class="fas fa-sparkles"></i><span>Study Assistant</span>
             </a>
         {% endif %}
         <a href="{% url 'profile' %}" class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">

@@ -67,8 +67,12 @@
                                 class="fas fa-download"></i> {{ sub.filename }}</a>
                     </td>
                     <td>
-                        <a href="{% url 'grade_submission' sub.pk %}" class="btn btn-primary btn-sm"><i
-                                class="fas fa-star"></i> Grade</a>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <a href="{% url 'grade_submission' sub.pk %}" class="btn btn-primary btn-sm"><i
+                                    class="fas fa-star"></i> Grade</a>
+                            <a href="{% url 'ai_assistant:evaluate_submission' sub.pk %}" class="btn btn-ghost btn-sm" title="Get an AI grading suggestion"><i
+                                    class="fas fa-sparkles"></i> AI Review</a>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}

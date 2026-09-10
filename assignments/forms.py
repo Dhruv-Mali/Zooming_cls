@@ -33,3 +33,11 @@ class GradeForm(forms.ModelForm):
         widgets = {
             'feedback': forms.Textarea(attrs={'rows': 3}),
         }
+
+    def clean_marks(self):
+        marks = self.cleaned_data.get('marks')
+        if marks is not None and self.instance.assignment_id and marks > self.instance.assignment.max_marks:
+            raise forms.ValidationError(
+                f'Marks cannot exceed the assignment maximum of {self.instance.assignment.max_marks}.'
+            )
+        return marks
